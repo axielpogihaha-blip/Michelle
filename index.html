@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Monthsary 💕</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFF6F0;
+    --rose:#C97B84;
+    --maroon:#5C2A3A;
+    --gold:#D4A373;
+    --pink-soft:#F6DCD6;
+    --ink:#4A2E35;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(180deg,var(--cream) 0%,var(--pink-soft) 100%);
+    color:var(--ink);
+    min-height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:env(safe-area-inset-top,20px) 20px env(safe-area-inset-bottom,20px);
+    overflow-x:hidden;
+    position:relative;
+  }
+  .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
+  .heart{
+    position:absolute;
+    bottom:-10%;
+    font-size:18px;
+    color:var(--rose);
+    opacity:.55;
+    animation:rise linear infinite;
+  }
+  @keyframes rise{
+    to{transform:translateY(-115vh) rotate(20deg);opacity:0;}
+  }
+  .card{
+    position:relative;
+    z-index:1;
+    max-width:460px;
+    width:100%;
+    background:#fffaf7;
+    border-radius:28px;
+    padding:40px 32px 34px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(92,42,58,.18);
+    border:1px solid #f0d9d2;
+  }
+  h1{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-weight:700;
+    font-size:clamp(28px,7vw,38px);
+    margin:0 0 6px;
+    color:var(--maroon);
+    line-height:1.15;
+  }
+  .sub{
+    font-size:14px;
+    letter-spacing:.3px;
+    color:var(--rose);
+    margin:0 0 26px;
+  }
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    margin:0 0 30px;
+  }
+  .unit{display:flex;flex-direction:column;align-items:center;}
+  .unit .num{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:30px;
+    color:var(--maroon);
+    background:var(--pink-soft);
+    border-radius:14px;
+    width:60px;
+    padding:10px 0;
+  }
+  .unit .lbl{font-size:11px;margin-top:6px;color:var(--rose);}
+  #stage-intro, #stage-name, #stage-compliment{display:none;}
+  #stage-intro.active, #stage-name.active, #stage-compliment.active{display:block;}
+  p.msg{
+    font-size:15px;
+    line-height:1.7;
+    color:var(--ink);
+    min-height:70px;
+  }
+  input{
+    width:100%;
+    padding:13px 16px;
+    border-radius:14px;
+    border:1.5px solid var(--pink-soft);
+    font-family:'Poppins',sans-serif;
+    font-size:15px;
+    margin-bottom:16px;
+    background:#fff;
+    color:var(--ink);
+  }
+  input:focus{outline:2px solid var(--rose);outline-offset:1px;}
+  button{
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:15px;
+    color:#fff;
+    background:var(--rose);
+    border:none;
+    border-radius:14px;
+    padding:13px 26px;
+    cursor:pointer;
+    transition:background .2s ease, transform .2s ease;
+  }
+  button:hover{background:var(--maroon);}
+  button:active{transform:scale(.97);}
+  button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .again{
+    background:transparent;
+    color:var(--rose);
+    border:1.5px solid var(--rose);
+    margin-top:14px;
+  }
+  .again:hover{background:var(--pink-soft);color:var(--maroon);}
+  .heart-divider{font-size:13px;color:var(--gold);margin:18px 0;}
+  @media (prefers-reduced-motion: reduce){
+    .heart{animation:none;display:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts" id="hearts"></div>
+
+<div class="card">
+
+  <div id="stage-intro" class="active">
+    <h1>Happy Monthsary,<br>mahal ko 💕</h1>
+    <p class="sub">dahil sa bawat araw na lumilipas, mas lalo lang kitang nagugustuhan</p>
+
+    <div class="countdown" id="countdown">
+      <div class="unit"><div class="num" id="cd-h">00</div><div class="lbl">oras</div></div>
+      <div class="unit"><div class="num" id="cd-m">00</div><div class="lbl">minuto</div></div>
+      <div class="unit"><div class="num" id="cd-s">00</div><div class="lbl">segundo</div></div>
+    </div>
+
+    <p class="msg" id="intro-msg"></p>
+    <button onclick="goToName()">Sundan mo ako →</button>
+  </div>
+
+  <div id="stage-name">
+    <h1>Hoy, ikaw ba 'yan?</h1>
+    <p class="sub">type mo lang pangalan mo para malaman mo kung ano meron ako sa'yo</p>
+    <input id="nameInput" type="text" placeholder="Pangalan mo..." />
+    <button onclick="goToCompliment()">Paki-click 👉</button>
+  </div>
+
+  <div id="stage-compliment">
+    <h1 id="greetName">Hi!</h1>
+    <div class="heart-divider">♡ ♡ ♡</div>
+    <p class="msg" id="compliment-text"></p>
+    <button class="again" onclick="newCompliment()">Isa pa please 🥺</button>
+  </div>
+
+</div>
+
+<script>
+// ---------- floating hearts background ----------
+const heartsEl = document.getElementById('hearts');
+for(let i=0;i<16;i++){
+  const h = document.createElement('div');
+  h.className='heart';
+  h.textContent = Math.random() > .5 ? '♡' : '♥';
+  h.style.left = Math.random()*100+'%';
+  h.style.fontSize = (12 + Math.random()*16)+'px';
+  h.style.animationDuration = (8 + Math.random()*10)+'s';
+  h.style.animationDelay = (Math.random()*10)+'s';
+  heartsEl.appendChild(h);
+}
+
+// ---------- countdown to monthsary (tomorrow) ----------
+const target = new Date();
+target.setDate(target.getDate() + 1);
+target.setHours(0,0,0,0);
+
+function tickCountdown(){
+  const now = new Date();
+  let diff = target - now;
+  if(diff < 0) diff = 0;
+  const h = Math.floor(diff/3600000);
+  const m = Math.floor((diff%3600000)/60000);
+  const s = Math.floor((diff%60000)/1000);
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
+
+// ---------- typing effect ----------
+function typeText(el, text, speed=28){
+  el.textContent = '';
+  let i = 0;
+  const iv = setInterval(()=>{
+    el.textContent += text[i];
+    i++;
+    if(i >= text.length) clearInterval(iv);
+  }, speed);
+}
+
+typeText(document.getElementById('intro-msg'),
+  "Gusto lang kitang pasayahin ngayon, kaya gumawa ako ng maliit na bagay para sa'yo...", 28);
+
+// ---------- stage switching ----------
+function goToName(){
+  document.getElementById('stage-intro').classList.remove('active');
+  document.getElementById('stage-name').classList.add('active');
+}
+
+const compliments = [
+  "ang ganda ng ngiti mo kapag naiisip mo ako.",
+  "palagi akong napapasaya kapag kasama ka.",
+  "ikaw ang pinaka-perfect na bagay na nangyari sa buhay ko.",
+  "mahal na mahal kita, kahit anong mangyari.",
+  "ang swerte ko dahil ikaw ang nakatabi ko.",
+  "hindi ako nagsisisi na minahal kita.",
+  "bawat araw kasama ka ay parang kwento na gusto kong ipagpatuloy magpakailanman.",
+  "ikaw ang dahilan kung bakit mas maganda ang araw ko.",
+  "wala akong pinagsisihan sa pagpili na ikaw ang mahalin.",
+  "thank you sa pagiging ikaw. Mahal kita nang sobra-sobra."
+];
+let usedIdx = [];
+let currentName = "love";
+
+function pickCompliment(){
+  if(usedIdx.length >= compliments.length) usedIdx = [];
+  let idx;
+  do{ idx = Math.floor(Math.random()*compliments.length); }
+  while(usedIdx.includes(idx));
+  usedIdx.push(idx);
+  return compliments[idx];
+}
+
+function goToCompliment(){
+  const val = document.getElementById('nameInput').value.trim();
+  currentName = val.length ? val : "love";
+  document.getElementById('greetName').textContent = "Hi, " + currentName + "!";
+  document.getElementById('stage-name').classList.remove('active');
+  document.getElementById('stage-compliment').classList.add('active');
+  typeText(document.getElementById('compliment-text'), currentName + ", " + pickCompliment(), 26);
+}
+
+function newCompliment(){
+  typeText(document.getElementById('compliment-text'), currentName + ", " + pickCompliment(), 26);
+}
+</script>
+
+</body>
+</html>
