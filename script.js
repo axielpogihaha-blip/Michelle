@@ -17,7 +17,6 @@ const messages = [
   "Alam kong kayang kaya mo palagi palangga.",
   "Nandito lang ako palagi para sayo tangi.",
   "Tutuparin natin mga pangarap natin na magkasama hun.",
-  
 ];
 
 const button = document.getElementById("messageBtn");
@@ -27,7 +26,7 @@ button.addEventListener("click", function () {
   const randomIndex = Math.floor(Math.random() * messages.length);
   messageBox.textContent = messages[randomIndex];
 });
-// 3. Music playlist
+
 const songs = ["kanta1.mp3", "kanta2.mp3", "kanta3.mp3"];
 let current = 0;
 
@@ -55,4 +54,3 @@ function playNext() {
 nextBtn.addEventListener("click", playNext);
 song.addEventListener("ended", playNext);
 
-alert("umabot sa dulo");
