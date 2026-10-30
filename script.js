@@ -54,3 +54,5 @@ function playNext() {
 
 nextBtn.addEventListener("click", playNext);
 song.addEventListener("ended", playNext);
+
+alert("umabot sa dulo");
