@@ -1,3 +1,14 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 body {
   margin: 0;
   min-height: 100vh;
@@ -15,10 +26,12 @@ h1 {
   font-size: 2.2rem;
   margin-bottom: 10px;
   color: #d6336c;
+animation: fadeIn 1.5s ease;
 }
 
 p {
   font-size: 1.1rem;
   max-width: 320px;
   line-height: 1.6;
-  }
+animation: fadeIn 1.5s ease;  
+}
