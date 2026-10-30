@@ -27,3 +27,30 @@ button.addEventListener("click", function () {
   const randomIndex = Math.floor(Math.random() * messages.length);
   messageBox.textContent = messages[randomIndex];
 });
+// 3. Music playlist
+const songs = ["kanta1.mp3", "kanta2.mp3", "kanta3.mp3"];
+let current = 0;
+
+const song = document.getElementById("song");
+const musicBtn = document.getElementById("musicBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+musicBtn.addEventListener("click", function () {
+  if (song.paused) {
+    song.play();
+    musicBtn.textContent = "⏸ Pause music";
+  } else {
+    song.pause();
+    musicBtn.textContent = "▶ Play music";
+  }
+});
+
+function playNext() {
+  current = (current + 1) % songs.length;
+  song.src = songs[current];
+  song.play();
+  musicBtn.textContent = "⏸ Pause music";
+}
+
+nextBtn.addEventListener("click", playNext);
+song.addEventListener("ended", playNext);
