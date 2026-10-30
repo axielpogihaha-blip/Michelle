@@ -8,222 +8,174 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --cream:#FFF6F0;
-    --rose:#C97B84;
-    --maroon:#5C2A3A;
-    --gold:#D4A373;
-    --pink-soft:#F6DCD6;
-    --ink:#4A2E35;
-  }
+  :root{--cream:#FFF6F0;--rose:#C97B84;--maroon:#5C2A3A;--gold:#D4A373;--pink-soft:#F6DCD6;--ink:#4A2E35;}
   *{box-sizing:border-box;}
-  html,body{height:100%;}
-  body{
-    margin:0;
-    font-family:'Poppins',sans-serif;
-    background:linear-gradient(180deg,var(--cream) 0%,var(--pink-soft) 100%);
-    color:var(--ink);
-    min-height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:env(safe-area-inset-top,20px) 20px env(safe-area-inset-bottom,20px);
-    overflow-x:hidden;
-    position:relative;
-  }
+  html,body{min-height:100%;}
+  body{margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(180deg,var(--cream) 0%,var(--pink-soft) 100%);background-attachment:fixed;color:var(--ink);display:flex;align-items:center;justify-content:center;padding:env(safe-area-inset-top,20px) 20px env(safe-area-inset-bottom,20px);overflow-x:hidden;position:relative;}
   .hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;}
-  .heart{
-    position:absolute;
-    bottom:-10%;
-    font-size:18px;
-    color:var(--rose);
-    opacity:.55;
-    animation:rise linear infinite;
-  }
-  @keyframes rise{
-    to{transform:translateY(-115vh) rotate(20deg);opacity:0;}
-  }
-  .card{
-    position:relative;
-    z-index:1;
-    max-width:460px;
-    width:100%;
-    background:#fffaf7;
-    border-radius:28px;
-    padding:40px 32px 34px;
-    text-align:center;
-    box-shadow:0 20px 60px rgba(92,42,58,.18);
-    border:1px solid #f0d9d2;
-  }
-  h1{
-    font-family:'Playfair Display',serif;
-    font-style:italic;
-    font-weight:700;
-    font-size:clamp(28px,7vw,38px);
-    margin:0 0 6px;
-    color:var(--maroon);
-    line-height:1.15;
-  }
-  .sub{
-    font-size:14px;
-    letter-spacing:.3px;
-    color:var(--rose);
-    margin:0 0 26px;
-  }
-  .countdown{
-    display:flex;
-    justify-content:center;
-    gap:14px;
-    margin:0 0 30px;
-  }
+  .heart{position:absolute;bottom:-10%;font-size:18px;color:var(--rose);opacity:.55;animation:rise linear infinite;}
+  @keyframes rise{to{transform:translateY(-115vh) rotate(20deg);opacity:0;}}
+  .card{position:relative;z-index:1;max-width:460px;width:100%;background:#fffaf7;border-radius:28px;padding:40px 32px 34px;text-align:center;box-shadow:0 20px 60px rgba(92,42,58,.18);border:1px solid #f0d9d2;}
+  h1{font-family:'Playfair Display',serif;font-style:italic;font-weight:700;font-size:clamp(28px,7vw,38px);margin:0 0 6px;color:var(--maroon);line-height:1.15;}
+  .sub{font-size:14px;letter-spacing:.3px;color:var(--rose);margin:0 0 26px;}
+  .countdown{display:flex;justify-content:center;gap:10px;margin:0 0 8px;}
   .unit{display:flex;flex-direction:column;align-items:center;}
-  .unit .num{
-    font-family:'Playfair Display',serif;
-    font-weight:700;
-    font-size:30px;
-    color:var(--maroon);
-    background:var(--pink-soft);
-    border-radius:14px;
-    width:60px;
-    padding:10px 0;
-  }
+  .unit .num{font-family:'Playfair Display',serif;font-weight:700;font-size:26px;color:var(--maroon);background:var(--pink-soft);border-radius:14px;width:56px;padding:10px 0;}
   .unit .lbl{font-size:11px;margin-top:6px;color:var(--rose);}
-  #stage-intro, #stage-name, #stage-compliment{display:none;}
-  #stage-intro.active, #stage-name.active, #stage-compliment.active{display:block;}
-  p.msg{
-    font-size:15px;
-    line-height:1.7;
-    color:var(--ink);
-    min-height:70px;
-  }
-  input{
-    width:100%;
-    padding:13px 16px;
-    border-radius:14px;
-    border:1.5px solid var(--pink-soft);
-    font-family:'Poppins',sans-serif;
-    font-size:15px;
-    margin-bottom:16px;
-    background:#fff;
-    color:var(--ink);
-  }
+  .cd-note{font-size:12px;color:var(--rose);margin:0 0 26px;}
+  .stage{display:none;}
+  .stage.active{display:block;}
+  p.msg{font-size:15px;line-height:1.7;color:var(--ink);min-height:70px;}
+  input{width:100%;padding:13px 16px;border-radius:14px;border:1.5px solid var(--pink-soft);font-family:'Poppins',sans-serif;font-size:15px;margin-bottom:16px;background:#fff;color:var(--ink);}
   input:focus{outline:2px solid var(--rose);outline-offset:1px;}
-  button{
-    font-family:'Poppins',sans-serif;
-    font-weight:600;
-    font-size:15px;
-    color:#fff;
-    background:var(--rose);
-    border:none;
-    border-radius:14px;
-    padding:13px 26px;
-    cursor:pointer;
-    transition:background .2s ease, transform .2s ease;
-  }
+  button{font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;color:#fff;background:var(--rose);border:none;border-radius:14px;padding:13px 26px;cursor:pointer;transition:background .2s ease,transform .2s ease;}
   button:hover{background:var(--maroon);}
   button:active{transform:scale(.97);}
-  button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
-  .again{
-    background:transparent;
-    color:var(--rose);
-    border:1.5px solid var(--rose);
-    margin-top:14px;
-  }
+  button:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+  .again{background:transparent;color:var(--rose);border:1.5px solid var(--rose);margin-top:14px;}
   .again:hover{background:var(--pink-soft);color:var(--maroon);}
   .heart-divider{font-size:13px;color:var(--gold);margin:18px 0;}
-  @media (prefers-reduced-motion: reduce){
-    .heart{animation:none;display:none;}
-  }
+  /* ===== BAGONG SECTIONS ===== */
+  .big{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--maroon);margin:0;}
+  .menu button{display:block;width:100%;margin-bottom:12px;}
+  .list{text-align:left;margin:22px 0 8px;}
+  .memory{background:#fff;border-left:4px solid var(--rose);border-radius:12px;padding:14px 16px;margin-bottom:16px;}
+  .memory .date{color:var(--rose);font-size:12px;margin:0 0 4px;}
+  .memory h2{font-family:'Playfair Display',serif;font-size:19px;color:var(--maroon);margin:0 0 6px;}
+  .memory p{margin:0;font-size:14px;line-height:1.6;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0 8px;}
+  .grid figure{margin:0;}
+  .grid img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px;}
+  .grid figcaption{font-size:12px;margin-top:4px;}
+  details.letter{background:#fff;border:1.5px dashed var(--rose);border-radius:12px;padding:14px;margin-bottom:12px;text-align:left;}
+  details.letter summary{cursor:pointer;font-weight:600;color:var(--maroon);}
+  details.letter p{margin:10px 0 0;font-size:14px;line-height:1.6;}
+  .opt{display:block;width:100%;margin-bottom:10px;background:#fff;color:var(--ink);border:1.5px solid var(--pink-soft);}
+  .opt:hover{background:var(--pink-soft);}
+  #music{position:fixed;top:12px;right:12px;z-index:5;padding:8px 12px;font-size:13px;display:none;}
+  @media (prefers-reduced-motion: reduce){.heart{animation:none;display:none;}}
 </style>
 </head>
 <body>
 
 <div class="hearts" id="hearts"></div>
+<button id="music">🎵 Music</button>
 
 <div class="card">
 
-  <div id="stage-intro" class="active">
+  <!-- 9. PASSCODE -->
+  <div id="stage-gate" class="stage active">
+    <h1>Para kay Asawa ko 🔒</h1>
+    <p class="sub">ilagay ang passcode natin</p>
+    <input id="gateInput" type="text" placeholder="Passcode..." autocomplete="off">
+    <p class="cd-note" id="gateMsg"></p>
+    <button id="gateBtn">Buksan</button>
+  </div>
+
+  <div id="stage-intro" class="stage">
     <h1>Happy Monthsary,<br>asawa ko</h1>
     <p class="sub">dahil sa bawat araw na lumilipas, pagmamahal ko sayo ay hindi kukupas, shish</p>
-
-    <div class="countdown" id="countdown">
+    <div class="countdown">
+      <div class="unit"><div class="num" id="cd-d">00</div><div class="lbl">araw</div></div>
       <div class="unit"><div class="num" id="cd-h">00</div><div class="lbl">oras</div></div>
       <div class="unit"><div class="num" id="cd-m">00</div><div class="lbl">minuto</div></div>
       <div class="unit"><div class="num" id="cd-s">00</div><div class="lbl">segundo</div></div>
     </div>
-
+    <p class="cd-note" id="cd-note"></p>
     <p class="msg" id="intro-msg"></p>
-    <button onclick="goToName()">tap mo lang baby →</button>
+    <button onclick="showStage('stage-name')">tap mo lang baby →</button>
   </div>
 
-  <div id="stage-name">
+  <div id="stage-name" class="stage">
     <h1>Hi, ikaw ba 'yan asawa ko?</h1>
     <p class="sub">type mo lang pangalan mo para malaman mo surprise ko hehe</p>
-    <input id="nameInput" type="text" placeholder="Pangalan mo..." />
+    <input id="nameInput" type="text" placeholder="Pangalan mo...">
     <button onclick="goToCompliment()">pindotin mo ako baby</button>
   </div>
 
-  <div id="stage-compliment">
+  <div id="stage-compliment" class="stage">
     <h1 id="greetName">Hi!</h1>
     <div class="heart-divider">♡ ♡ ♡</div>
     <p class="msg" id="compliment-text"></p>
-    <button class="again" onclick="newCompliment()">isa pa loveloveee 👉👈</button>
+    <button class="again" onclick="newCompliment()">isa pa loveloveee 👉👈</button><br>
+    <button class="again" onclick="showStage('stage-menu')">Tuklasin pa 💕</button>
+  </div>
+
+  <!-- MENU + 2. DAYS TOGETHER -->
+  <div id="stage-menu" class="stage menu">
+    <p class="sub" style="margin-bottom:0">tayo na ngayon ng</p>
+    <p class="big" id="days">0</p>
+    <p class="sub">araw 💞</p>
+    <button onclick="showStage('stage-timeline')">📖 Ang Kwento Natin</button>
+    <button onclick="showStage('stage-gallery')">📷 Mga Larawan</button>
+    <button onclick="showStage('stage-letters')">💌 Mga Sulat</button>
+    <button onclick="startQuiz()">🎮 Love Quiz</button>
+  </div>
+
+  <!-- 1. TIMELINE -->
+  <div id="stage-timeline" class="stage">
+    <h1>Ang Kwento Natin</h1>
+    <p class="sub">mga sandaling hindi ko malilimutan</p>
+    <div class="list" id="timeline"></div>
+    <button class="again" onclick="showStage('stage-menu')">← Balik</button>
+  </div>
+
+  <!-- 3. GALLERY -->
+  <div id="stage-gallery" class="stage">
+    <h1>Mga Larawan</h1>
+    <p class="sub">mga alaala natin</p>
+    <div class="grid" id="gallery"></div>
+    <button class="again" onclick="showStage('stage-menu')">← Balik</button>
+  </div>
+
+  <!-- 4 + 6. LOVE LETTERS / OPEN WHEN -->
+  <div id="stage-letters" class="stage">
+    <h1>Mga Sulat</h1>
+    <p class="sub">i-tap para buksan</p>
+    <div class="list" id="letters"></div>
+    <button class="again" onclick="showStage('stage-menu')">← Balik</button>
+  </div>
+
+  <!-- 7. QUIZ -->
+  <div id="stage-quiz" class="stage">
+    <h1>Love Quiz</h1>
+    <div class="list" id="quiz"></div>
+    <button class="again" onclick="showStage('stage-menu')">← Balik</button>
   </div>
 
 </div>
 
 <script>
-// ---------- floating hearts background ----------
-const heartsEl = document.getElementById('hearts');
-for(let i=0;i<16;i++){
-  const h = document.createElement('div');
-  h.className='heart';
-  h.textContent = Math.random() > .5 ? '♡' : '♥';
-  h.style.left = Math.random()*100+'%';
-  h.style.fontSize = (12 + Math.random()*16)+'px';
-  h.style.animationDuration = (8 + Math.random()*10)+'s';
-  h.style.animationDelay = (Math.random()*10)+'s';
-  heartsEl.appendChild(h);
-}
+// =====================================================
+//  ✏️ DITO KA MAG-EDIT (lahat ng pwede mong baguhin)
+// =====================================================
+const PASSCODE = "030126";        // 9. Passcode (palitan! hal. petsa ng anniversary)
+const MONTHSARY_DAY = 3;          // 5. Araw ng monthsary (1-31)
+const START_DATE = "2026-01-03";  // 2. Petsa na naging kayo (YYYY-MM-DD)
+const MUSIC_FILE = "";            // 8. hal. "song.mp3" (i-upload muna sa repo). Iwanang "" kung wala
 
-// ---------- countdown to monthsary (tomorrow) ----------
-const target = new Date();
-target.setDate(target.getDate() + 1);
-target.setHours(0,0,0,0);
+// 1. Timeline. May kuwit (,) sa dulo ng bawat { } maliban sa huli.
+const memories = [
+  { date: "January 3, 2026", title: "Unang Pagkikita", story: "Dito mo isusulat kung paano kayo nagkita..." },
+  { date: "February 3, 2026", title: "First Monthsary", story: "Ang unang buwan niyo..." }
+];
 
-function tickCountdown(){
-  const now = new Date();
-  let diff = target - now;
-  if(diff < 0) diff = 0;
-  const h = Math.floor(diff/3600000);
-  const m = Math.floor((diff%3600000)/60000);
-  const s = Math.floor((diff%60000)/1000);
-  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
-  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
-  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
-}
-tickCountdown();
-setInterval(tickCountdown, 1000);
+// 3. Larawan. I-upload ang mga litrato sa folder na "images" sa repo.
+// Halimbawa: { src: "images/1.jpg", caption: "First date" },
+const photos = [];
 
-// ---------- typing effect ----------
-function typeText(el, text, speed=28){
-  el.textContent = '';
-  let i = 0;
-  const iv = setInterval(()=>{
-    el.textContent += text[i];
-    i++;
-    if(i >= text.length) clearInterval(iv);
-  }, speed);
-}
+// 4 + 6. Mga sulat (love letters at "Open when...")
+const letters = [
+  { label: "Open when you miss me", text: "Isulat mo dito ang sulat mo..." },
+  { label: "Open when you're sad", text: "Isulat mo dito ang sulat mo..." },
+  { label: "Open when you can't sleep", text: "Isulat mo dito ang sulat mo..." }
+];
 
-typeText(document.getElementById('intro-msg'),
-  "Gusto kitang pasayahin ngayon baby,kaya sana magustuhan mo hehe", 28);
-
-// ---------- stage switching ----------
-function goToName(){
-  document.getElementById('stage-intro').classList.remove('active');
-  document.getElementById('stage-name').classList.add('active');
-}
+// 7. Quiz. "answer" ay numero ng tamang sagot, nagsisimula sa 0.
+const quiz = [
+  { q: "Saan tayo unang nagkita?", options: ["Sa school", "Sa mall", "Online"], answer: 0 },
+  { q: "Ano ang paborito kong kulay?", options: ["Blue", "Red", "Black"], answer: 0 }
+];
 
 const compliments = [
   "gustong gusto ko palagi ngiti mo, mas lalo ka gumaganda.",
@@ -237,31 +189,172 @@ const compliments = [
   "sarap mo baby, ay 🤭.",
   "Thank you so much for everything baby, i always love you so much."
 ];
+// =====================================================
+//  Hanggang dito lang ang kailangan mong galawin
+// =====================================================
+
+const $ = id => document.getElementById(id);
+const mk = (tag, cls, text) => {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text) e.textContent = text;
+  return e;
+};
+
+// ---------- floating hearts ----------
+for (let i = 0; i < 16; i++) {
+  const h = mk('div', 'heart', Math.random() > .5 ? '♡' : '♥');
+  h.style.left = Math.random() * 100 + '%';
+  h.style.fontSize = (12 + Math.random() * 16) + 'px';
+  h.style.animationDuration = (8 + Math.random() * 10) + 's';
+  h.style.animationDelay = (Math.random() * 10) + 's';
+  $('hearts').appendChild(h);
+}
+
+// ---------- screens ----------
+function showStage(id) {
+  document.querySelectorAll('.stage').forEach(s => s.classList.remove('active'));
+  $(id).classList.add('active');
+}
+
+// ---------- typing effect ----------
+function typeText(el, text, speed = 28) {
+  clearInterval(el._iv);
+  el.textContent = '';
+  let i = 0;
+  el._iv = setInterval(() => {
+    el.textContent += text[i];
+    i++;
+    if (i >= text.length) clearInterval(el._iv);
+  }, speed);
+}
+
+// ---------- 9. passcode ----------
+function unlock() {
+  if ($('gateInput').value.trim().toLowerCase() === PASSCODE.toLowerCase()) {
+    showStage('stage-intro');
+    typeText($('intro-msg'), "Gusto kitang pasayahin ngayon baby,kaya sana magustuhan mo hehe");
+  } else {
+    $('gateMsg').textContent = "Mali, subukan mo ulit 💔";
+  }
+}
+$('gateBtn').onclick = unlock;
+$('gateInput').onkeydown = e => { if (e.key === 'Enter') unlock(); };
+
+// ---------- 5. countdown sa susunod na monthsary ----------
+function nextMonthsary() {
+  const now = new Date();
+  let t = new Date(now.getFullYear(), now.getMonth(), MONTHSARY_DAY);
+  if (t <= now) t = new Date(now.getFullYear(), now.getMonth() + 1, MONTHSARY_DAY);
+  return t;
+}
+const pad = n => String(n).padStart(2, '0');
+function tick() {
+  const now = new Date();
+  const diff = nextMonthsary() - now;
+  $('cd-d').textContent = pad(Math.floor(diff / 86400000));
+  $('cd-h').textContent = pad(Math.floor(diff % 86400000 / 3600000));
+  $('cd-m').textContent = pad(Math.floor(diff % 3600000 / 60000));
+  $('cd-s').textContent = pad(Math.floor(diff % 60000 / 1000));
+  $('cd-note').textContent = now.getDate() === MONTHSARY_DAY
+    ? "🎉 Monthsary natin ngayon! 🎉" : "para sa susunod na monthsary natin";
+}
+tick();
+setInterval(tick, 1000);
+
+// ---------- 2. days together ----------
+$('days').textContent = Math.max(0, Math.floor((new Date() - new Date(START_DATE)) / 864e5));
+
+// ---------- compliments ----------
 let usedIdx = [];
 let currentName = "love";
-
-function pickCompliment(){
-  if(usedIdx.length >= compliments.length) usedIdx = [];
+function pickCompliment() {
+  if (usedIdx.length >= compliments.length) usedIdx = [];
   let idx;
-  do{ idx = Math.floor(Math.random()*compliments.length); }
-  while(usedIdx.includes(idx));
+  do { idx = Math.floor(Math.random() * compliments.length); } while (usedIdx.includes(idx));
   usedIdx.push(idx);
   return compliments[idx];
 }
-
-function goToCompliment(){
-  const val = document.getElementById('nameInput').value.trim();
+function newCompliment() {
+  typeText($('compliment-text'), currentName + ", " + pickCompliment(), 26);
+}
+function goToCompliment() {
+  const val = $('nameInput').value.trim();
   currentName = val.length ? val : "love";
-  document.getElementById('greetName').textContent = "Hi, " + currentName + "!";
-  document.getElementById('stage-name').classList.remove('active');
-  document.getElementById('stage-compliment').classList.add('active');
-  typeText(document.getElementById('compliment-text'), currentName + ", " + pickCompliment(), 26);
+  $('greetName').textContent = "Hi, " + currentName + "!";
+  showStage('stage-compliment');
+  newCompliment();
 }
 
-function newCompliment(){
-  typeText(document.getElementById('compliment-text'), currentName + ", " + pickCompliment(), 26);
+// ---------- 1. timeline ----------
+memories.forEach(m => {
+  const card = mk('div', 'memory');
+  card.append(mk('p', 'date', m.date), mk('h2', '', m.title), mk('p', '', m.story));
+  $('timeline').appendChild(card);
+});
+
+// ---------- 3. gallery ----------
+if (photos.length === 0) {
+  $('gallery').replaceWith(mk('p', 'msg', 'Wala pang larawan. Dagdagan mo sa photos list 📷'));
+} else {
+  photos.forEach(p => {
+    const fig = mk('figure');
+    const img = mk('img');
+    img.src = p.src;
+    img.alt = p.caption || 'Larawan namin';
+    img.loading = 'lazy';
+    fig.append(img, mk('figcaption', '', p.caption || ''));
+    $('gallery').appendChild(fig);
+  });
+}
+
+// ---------- 4 + 6. letters ----------
+letters.forEach(l => {
+  const d = mk('details', 'letter');
+  d.append(mk('summary', '', '💌 ' + l.label), mk('p', '', l.text));
+  $('letters').appendChild(d);
+});
+
+// ---------- 7. quiz ----------
+let qi = 0, score = 0;
+function startQuiz() { qi = 0; score = 0; showStage('stage-quiz'); showQ(); }
+function showQ() {
+  const box = $('quiz');
+  box.textContent = '';
+  if (qi >= quiz.length) {
+    box.append(mk('p', 'msg', `Score mo: ${score}/${quiz.length} 💕`));
+    const again = mk('button', '', 'Ulitin');
+    again.onclick = startQuiz;
+    box.append(again);
+    return;
+  }
+  const q = quiz[qi];
+  box.append(mk('p', 'msg', q.q));
+  q.options.forEach((o, i) => {
+    const b = mk('button', 'opt', o);
+    b.onclick = () => {
+      if (i === q.answer) score++;
+      box.textContent = '';
+      box.append(mk('p', 'msg', i === q.answer ? 'Tama! ✅' : 'Mali! ❌ Ang tama: ' + q.options[q.answer]));
+      qi++;
+      setTimeout(showQ, 1200);
+    };
+    box.append(b);
+  });
+}
+
+// ---------- 8. music ----------
+if (MUSIC_FILE) {
+  const audio = new Audio(MUSIC_FILE);
+  audio.loop = true;
+  const btn = $('music');
+  btn.style.display = 'block';
+  btn.onclick = () => {
+    if (audio.paused) { audio.play(); btn.textContent = '⏸ Music'; }
+    else { audio.pause(); btn.textContent = '🎵 Music'; }
+  };
 }
 </script>
 
 </body>
-</html>
+  </html>
