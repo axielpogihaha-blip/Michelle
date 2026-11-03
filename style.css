@@ -35,3 +35,25 @@ p {
   line-height: 1.6;
 animation: fadeIn 1.5s ease;  
 }
+
+h2 {
+  color: #d6336c;
+  animation: fadeIn 1.5s ease;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+}
