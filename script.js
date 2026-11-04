@@ -22,9 +22,11 @@ const messages = [
 const button = document.getElementById("messageBtn");
 const messageBox = document.getElementById("message");
 
+let messageIndex = 0;
+
 button.addEventListener("click", function () {
-  const randomIndex = Math.floor(Math.random() * messages.length);
-  messageBox.textContent = messages[randomIndex];
+  messageBox.textContent = messages[messageIndex];
+  messageIndex = (messageIndex + 1) % messages.length;
 });
 
 const songs = ["kanta1.mp3", "kanta2.mp3", "kanta3.mp3"];
