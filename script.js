@@ -56,7 +56,6 @@ function playNext() {
 nextBtn.addEventListener("click", playNext);
 song.addEventListener("ended", playNext);
 
-// 4. Gallery slideshow na may message
 const photos = ["photo1.jpeg", "photo2.jpeg", "photo3.jpeg", "photo4.jpeg"];
 const captions = [
   "Unang date nating dalawa na kahit online lang ay nagpasaya sa atin ng sobra at nagpabusog pa hehe",
