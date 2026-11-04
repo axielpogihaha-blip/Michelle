@@ -56,3 +56,34 @@ function playNext() {
 nextBtn.addEventListener("click", playNext);
 song.addEventListener("ended", playNext);
 
+// 4. Gallery slideshow na may message
+const photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg"];
+const captions = [
+  "Unang date nating dalawa na kahit online lang ay nagpasaya sa atin ng sobra at nagpabusog pa hehe",
+  "Unang Regalo na binigay ko sayo, sobrang tuwa ko kasi nagustuhan mo baby,at sobrang inalagaan mo talaga",
+  "Unang Regalo na binigay ko sayo, sobrang tuwa ko kasi nagustuhan mo baby,at sobrang inalagaan mo talaga",
+  "Unang bonding naman natin dahil first monthsary din natin, sobra cute natin dalawa at sweet sa laro na to mahal"
+];
+let photoIndex = 0;
+
+const photo = document.getElementById("photo");
+const caption = document.getElementById("caption");
+const photoCount = document.getElementById("photoCount");
+
+function showPhoto() {
+  photo.src = photos[photoIndex];
+  caption.textContent = captions[photoIndex];
+  photoCount.textContent = (photoIndex + 1) + " / " + photos.length;
+}
+
+document.getElementById("nextPhoto").addEventListener("click", function () {
+  photoIndex = (photoIndex + 1) % photos.length;
+  showPhoto();
+});
+
+document.getElementById("prevPhoto").addEventListener("click", function () {
+  photoIndex = (photoIndex - 1 + photos.length) % photos.length;
+  showPhoto();
+});
+
+showPhoto();
