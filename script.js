@@ -60,7 +60,7 @@ const photos = ["photo1.jpeg", "photo2.jpeg", "photo3.jpeg", "photo4.jpeg"];
 const captions = [
   "Unang date nating dalawa na kahit online lang ay nagpasaya sa atin ng sobra at nagpabusog pa hehe",
   "Unang Regalo na binigay ko sayo, sobrang tuwa ko kasi nagustuhan mo baby,at sobrang inalagaan mo talaga",
-  "Unang Regalo na binigay ko sayo, sobrang tuwa ko kasi nagustuhan mo baby,at sobrang inalagaan mo talaga",
+  "Unang regalo mo naman sa akin, sobrang cute,may kasama pa little flower. Ito rin yung araw na gusto ko ipaalam sayo na ikaw lang palagi mahal",
   "Unang bonding naman natin dahil first monthsary din natin, sobra cute natin dalawa at sweet sa laro na to mahal"
 ];
 let photoIndex = 0;
